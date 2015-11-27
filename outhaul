@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+require_relative 'lib/export_command'
+
+opts = {
+  api_token: ARGV[1] || ENV['TRACKER_TOKEN'],
+  project_id: ARGV[2] || ENV['TRACKER_PROJECT_ID']
+}
+command = Outhaul::ExportCommand.new opts
+
+file = ARGV[0]
+
+if command.run file
+  puts 'Success!'
+else
+  puts 'Error!'
+end

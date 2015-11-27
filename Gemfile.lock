@@ -22,7 +22,11 @@ GEM
       faraday (>= 0.7.4, < 0.10)
     ice_nine (0.11.1)
     method_source (0.8.2)
+    mini_portile (0.6.2)
+    multi_json (1.11.2)
     multipart-post (2.0.0)
+    nokogiri (1.6.6.4)
+      mini_portile (~> 0.6.0)
     oj (2.13.1)
     pry (0.10.3)
       coderay (~> 1.1.0)
@@ -32,6 +36,8 @@ GEM
     representable (2.4.0)
       declarative (~> 0.0.5)
       uber (~> 0.0.15)
+    reverse_markdown (1.0.0)
+      nokogiri
     rspec (3.4.0)
       rspec-core (~> 3.4.0)
       rspec-expectations (~> 3.4.0)
@@ -67,7 +73,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  multi_json
+  nokogiri
   pry
   redcarpet
+  reverse_markdown
   rspec
   tracker_api
+  virtus
