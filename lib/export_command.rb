@@ -144,7 +144,7 @@ module Outhaul
     private def label_in node
       regex = /\(([^\)]+)\)/
       match = regex.match node.text
-      match.captures.first
+      match.captures.first unless match.nil?
     end
 
     private def body
