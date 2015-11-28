@@ -29,7 +29,6 @@ module Outhaul
 
     private def process
       return if body.nil?
-      context_switched = false
 
       body.children.each do |node|
         handler = "process_#{node.name}"
@@ -40,7 +39,7 @@ module Outhaul
         end
       end
 
-      change_context_to nil
+      change_resource_to nil
     end
 
     private def save
@@ -49,30 +48,30 @@ module Outhaul
 
     private def process_h1 node
       @epic = find_or_create_resource_by node
-      change_context_to @epic
+      change_resource_to @epic
     end
 
     private def process_h2 node
       @story = find_or_create_resource_by node
-      change_context_to @story
+      change_resource_to @story
     end
 
     private def append node
       return if node.name.eql? 'text'
 
       if @reset_description
-        @context.description = ''
+        @resource.description = ''
         @reset_description = false
       end
 
       markdown = markdown_for node
-      @context.description << markdown
+      @resource.description << markdown
     end
 
-    private def change_context_to value
+    private def change_resource_to value
       @reset_description = true
-      @context.save unless @context.nil?
-      @context = value
+      @resource.save unless @resource.nil?
+      @resource = value
     end
 
     private def get_resource_for link
