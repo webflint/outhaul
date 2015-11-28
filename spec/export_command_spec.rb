@@ -16,7 +16,7 @@ describe Outhaul::ExportCommand do
 
     before do
       allow_any_instance_of(epic_endpoint).to receive(:create) do |instance, object, project_id, params|
-        epic.name = params[:name]
+        epic.name = params[:name] unless params.nil?
         epic
       end
       allow_any_instance_of(epic_resource).to receive(:save)
@@ -49,6 +49,16 @@ describe Outhaul::ExportCommand do
       it 'creates an Epic with a name matching the H1 text' do
         expect_any_instance_of(epic_endpoint).to receive(:create)
         expect(result.name).to eq epic_name
+      end
+
+      context 'without a label specified' do
+        let(:params) { {name: epic_name} }
+
+        it 'does not send a label param when creating the epic' do
+          expect_any_instance_of(epic_endpoint).to receive(:create).with('0000', params)
+          result
+        end
+
       end
 
     end
