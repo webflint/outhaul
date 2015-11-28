@@ -8,6 +8,8 @@ describe Outhaul::ExportCommand do
     let(:export_command) { Outhaul::ExportCommand.new options }
     let(:epic_endpoint) { TrackerApi::Endpoints::Epic }
     let(:epic_resource) { TrackerApi::Resources::Epic }
+    let(:story_endpoint) { TrackerApi::Endpoints::Story }
+    let(:story_resource) { TrackerApi::Resources::Story }
     let(:html) { '' }
 
     subject(:command) { export_command.run file }
@@ -17,8 +19,13 @@ describe Outhaul::ExportCommand do
         epic.name = params[:name]
         epic
       end
-
       allow_any_instance_of(epic_resource).to receive(:save)
+
+      allow_any_instance_of(story_endpoint).to receive(:create) do |instance, object, project_id, params|
+        story.name = params[:name]
+        story
+      end
+      allow_any_instance_of(story_resource).to receive(:save)
 
       allow(IO).to receive(:read).and_return(html)
     end
@@ -42,6 +49,23 @@ describe Outhaul::ExportCommand do
       it 'creates an Epic with a name matching the H1 text' do
         expect_any_instance_of(epic_endpoint).to receive(:create)
         expect(result.name).to eq epic_name
+      end
+
+    end
+
+    context 'with a Document containing a H2' do
+      let(:story) { story_resource.new }
+      let(:story_name) { 'This is an Story Name' }
+      let(:html) { "<h2>#{story_name}</h2>" }
+
+      subject(:result) do
+        command
+        story
+      end
+
+      it 'creates an Epic with a name matching the H1 text' do
+        expect_any_instance_of(story_endpoint).to receive(:create)
+        expect(result.name).to eq story_name
       end
 
     end
