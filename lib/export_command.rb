@@ -57,15 +57,15 @@ module Outhaul
     end
 
     private def append node
-      return if node.name.eql? 'text'
+      @resource.description = '' if @resource.description.nil?
 
       if @reset_description
         @resource.description = ''
         @reset_description = false
       end
 
-      markdown = markdown_for node
-      @resource.description << markdown
+      text = markdown_for node
+      @resource.description << text
     end
 
     private def change_resource_to value
@@ -163,6 +163,8 @@ module Outhaul
     end
 
     private def markdown_for node
+      return node.text if node.name.eql? 'text'
+
       html = node.to_s
       ReverseMarkdown.convert html
     end
