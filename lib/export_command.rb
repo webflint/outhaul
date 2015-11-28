@@ -111,7 +111,7 @@ module Outhaul
       else
         {
           name: name,
-          label_ids: [@epic.label.id]
+          label_ids: @epic.nil? ? '' : [@epic.label.id]
         }
       end
     end
