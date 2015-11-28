@@ -102,18 +102,16 @@ module Outhaul
       kind = node.name.eql?('h1') ? 'Epic' : 'Story'
 
       name = resource_name_for node
+      params = {name: name}
 
       if kind.eql? 'Epic'
-        {
-          name: name,
-          label: {name: label_in(node)}
-        }
+        epic_label = label_in(node)
+        params.merge!( label: {name: epic_label} ) unless epic_label.nil?
       else
-        {
-          name: name,
-          label_ids: @epic.nil? ? '' : [@epic.label.id]
-        }
+        params.merge!( label_ids: [@epic.label.id] ) unless @epic.nil?
       end
+
+      params
     end
 
     private def endpoint_for kind
