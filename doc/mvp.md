@@ -13,11 +13,7 @@ Create Epics from the H1 elements in my Document.
 **Given**
 
 *   List item
-*   A Document
-
-**With**
-
-*   `H1` element
+*   A Document with a `H1` element
 
 **When**
 
@@ -25,7 +21,8 @@ Create Epics from the H1 elements in my Document.
 
 **Then**
 
-*   An Epic is created in Tracker
+* An Epic is created in Tracker
+* The Epic's name matches the `H1` text 
 
 ## [Story Creation](https://www.pivotaltracker.com/story/show/109090662)
 

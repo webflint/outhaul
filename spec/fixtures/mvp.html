@@ -2,26 +2,21 @@
 
 <p>Write a command line Ruby script that transforms a HTML document into Pivotal Tracker Epic and Stories.</p>
 
+
+
 <h2 id="epic-creation"><a href="https://www.pivotaltracker.com/story/show/109090660">Epic Creation</a></h2>
 
-<p>As a Product Manager, </p>
+<p>As a Product Manager,</p>
 
-<p>So that I may publish Epics to Tracker from my Document, </p>
+<p>So that I may publish Epics to Tracker from my Document,</p>
 
 <p>Create Epics from the H1 elements in my Document.</p>
 
-<p><strong>Given</strong> </p>
+<p><strong>Given</strong></p>
 
 <ul>
 <li>List item</li>
-<li>A Document </li>
-</ul>
-
-<p><strong>With</strong></p>
-
-<ul>
-<li>
-<code>H1</code> element</li>
+<li>A Document with a <code>H1</code> element</li>
 </ul>
 
 <p><strong>When</strong></p>
@@ -33,19 +28,22 @@
 <p><strong>Then</strong></p>
 
 <ul>
-<li>An Epic is created in Tracker </li>
+<li>An Epic is created in Tracker</li>
+<li>The Epic’s name matches the <code>H1</code> text </li>
 </ul>
 
 <h2 id="story-creation"><a href="https://www.pivotaltracker.com/story/show/109090662">Story Creation</a></h2>
 
-<p>As a Product Manager, <br>
-So that I may publish Stories from my Document to Tracker, <br>
-Create a Story for every <code>H2</code> element in my Document</p>
+<p>As a Product Manager, </p>
+
+<p>So that I may publish Stories from my Document to Tracker, </p>
+
+<p>Create a Story for every <code>H2</code> element in my Document</p>
 
 <p><strong>Given</strong></p>
 
 <ul>
-<li>A Document </li>
+<li>A Document</li>
 <li>With a <code>H2</code> element</li>
 </ul>
 
